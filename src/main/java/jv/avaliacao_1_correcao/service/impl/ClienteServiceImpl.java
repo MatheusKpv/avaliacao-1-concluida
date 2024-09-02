@@ -26,7 +26,8 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public ClienteResponseDTO alteraCliente(Long id, ClienteAlteracaoDTO clienteDTO) {
-        var cliente = clienteRepository.findById(id).orElseThrow(() -> new RuntimeException("id nao encontrado"));
+        //var cliente = clienteRepository.findById(id).orElseThrow(() -> new RuntimeException("id nao encontrado"));
+        var cliente = getCliente(id);
         if (clienteDTO.nome() != null) {
             cliente.setNome(clienteDTO.nome());
         }
@@ -39,11 +40,17 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public List<ReservaResponseDTO> listaReservasCLiente(Long id) {
-        var cliente = clienteRepository.findById(id).orElseThrow(() -> new RuntimeException("id nao encontrado"));
+        //var cliente = clienteRepository.findById(id).orElseThrow(() -> new RuntimeException("id nao encontrado"));
+        var cliente = getCliente(id);
         var reservas = cliente.getReservas().stream().map(ReservaResponseDTO::new).toList();
         if (reservas.isEmpty()) {
             throw new RuntimeException("cliente nao tem reservas");
         }
         return reservas;
+    }
+
+    @Override
+    public Cliente getCliente(Long id) {
+        return clienteRepository.findById(id).orElseThrow(() -> new RuntimeException("id do cliente nao encontrado"));
     }
 }

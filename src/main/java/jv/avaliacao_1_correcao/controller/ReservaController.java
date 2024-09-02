@@ -31,8 +31,8 @@ public class ReservaController {
     @GetMapping
     public ResponseEntity<?> verificaDisponibilidadeMesa(@RequestParam Integer numeroMesa, @RequestParam LocalDate data) {
         try {
-            Boolean disponivel = reservaService.verificaDisponibilidadeMesa(numeroMesa, data);
-            return ResponseEntity.ok(disponivel);
+            Boolean indisponivel = reservaService.verificaDisponibilidadeMesa(numeroMesa, data);
+            return ResponseEntity.ok("Mesa disponvel");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(new ErrorMessageDTO(e.getMessage()));
         }

@@ -9,5 +9,6 @@ import java.util.List;
 
 @Repository
 public interface ReservaRepository extends JpaRepository<Reserva, Long> {
-    List<Reserva> findByNumeroMesaAndDataReserva(Integer numeroMesa, LocalDate data);
+
+    Boolean existsByNumeroMesaAndDataReserva(Integer numeroMesa, LocalDate data);
 }

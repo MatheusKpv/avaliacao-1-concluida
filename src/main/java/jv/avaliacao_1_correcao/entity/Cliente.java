@@ -18,8 +18,10 @@ public class Cliente {
     @SequenceGenerator(name = "cliente_seq", sequenceName = "cliente_sequence", allocationSize = 1)
     private Long id;
 
+    @Column(nullable = false)
     private String nome;
 
+    @Column(nullable = false, unique = true)
     private String email;
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
